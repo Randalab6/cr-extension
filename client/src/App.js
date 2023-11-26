@@ -120,8 +120,8 @@ function App() {
           }
         </div>
         <div className='flex justify-center items-center'>
-          <button className=' px-3 py-2 w-24 rounded-tl-3xl rounded-br-3xl shadow border bg-white hover:text-gray-400    text-black  flex justify-center' onClick={setTodayQuote}>Today</button>
-          <button className=' px-3 py-2 w-24 rounded-tl-3xl rounded-br-3xl  shadow ml-5 border bg-white hover:text-gray-400   text-black flex justify-center' onClick={handleFetchRandomQuote}>Random</button>
+          <button className=' px-3 py-2 w-24 rounded-2xl shadow border bg-white hover:text-gray-400    text-black  flex justify-center' onClick={setTodayQuote}>Today</button>
+          <button className=' px-3 py-2 w-24 rounded-2xl shadow ml-5 border bg-white hover:text-gray-400   text-black flex justify-center' onClick={handleFetchRandomQuote}>Random</button>
         </div>
         <div className='flex flex-col justify-center items-center my-5'>
           <div className='text-slate-400 my-5 w-96'>
