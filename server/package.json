@@ -1,0 +1,27 @@
+{
+	"name": "chrome-extension-app",
+	"version": "1.0.0",
+	"description": "Chrome extension App",
+	"engines": {
+			"node": "*"
+	},
+	"main": "app.js",
+	"scripts": {
+			"start": "node app.js",
+			"heroku-postbuild": "cd ../client && npm install && npm run build",
+			"client": "cd ../client && npm start",
+			"build": "cd ../client && npm run build",
+			"server": "nodemon app.js"
+	},
+	"author": "Randala K. Abraham",
+	"license": "ISC",
+	"dependencies": {
+			"cors": "^2.8.5",
+			"dotenv": "^16.0.3",
+			"express": "^4.18.2",
+			"mongoose": "^5.7.5"
+	},
+	"devDependencies": {
+			"nodemon": "^1.17.3"
+	}
+}
