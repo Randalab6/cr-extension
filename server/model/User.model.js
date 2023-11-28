@@ -1,8 +1,8 @@
 const mongoose = require("mongoose")
 
 const likeSchema = new mongoose.Schema({  
-    quotation: String,
-    author: String,
+    year: String,
+    text: String,
     image: String,
     imageSize: {
         height: Number,
