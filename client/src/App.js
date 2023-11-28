@@ -5,7 +5,11 @@ import { FiShare2 } from "react-icons/fi"
 import { SlHeart } from "react-icons/sl"
 import { AiFillHeart } from "react-icons/ai"
 import { BsArrowUpRight } from "react-icons/bs"
+
 import Likes from './Likes';
+import { v4 as uuidv4 } from 'uuid'; //to generate unique identifiers
+import { ToastContainer, toast } from 'react-toastify'; //to add notifications (toasts) 
+import 'react-toastify/dist/ReactToastify.css'; // CSS styles necessary for react-toastify to display correctly
 
 import { fetchRandomQuote } from './utils/quotes';
 import { generateCanvas } from './utils/canvas';
@@ -81,6 +85,49 @@ function App() {
     link.click();
   }
 
+  const likeFact = async () => {
+    try {
+      //Get the user ID from the local storage and check if it’s valid or not.
+      let userId = localStorage.getItem("userId");
+      const { year, text, image, imageSize } = fact;
+
+      // if userId doesn't exit, create new random user ID
+      if (!userId) {
+        userId = uuidv4();
+        localStorage.setItem("userId", userId);
+      }
+      // check if the fact already exists. If it is, then return from the function.
+      let sameFact = likes.filter(fact => fact.text === text)
+      if (sameFact.length) {
+        toast.info("You have already liked this fact")
+        return
+      }
+
+      // if not liked, send post request
+      const data = {
+        userId,
+        likedfact: {
+          year,
+          text,
+          image,
+          imageSize
+        }
+      }
+      await fetch("/likes/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+
+      //Update the likes state 
+      setLikes([...likes, { year, text, image, imageSize }])
+      toast.success("Fact liked successfully")
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+
   const share = () => { }
 
   const closeLikes = () => {
@@ -93,8 +140,9 @@ function App() {
 
   return (
     <div className="font-monteserat flex justify-center items-center">
-      <div className=''>
-        <h1 className='heading  text-center text-2xl mt-5  font-bold'>On this Day</h1>
+      <ToastContainer />
+      <div>
+        <h1 className='heading  text-center text-2xl mt-5  font-bold'>Random Quote Generator</h1>
         <div className='flex flex-col justify-center items-center'>
           <Likes likes={likes} open={openLikes} closeLikes={closeLikes} />
           {error ? <div className='h-80 w-96 m-5 flex flex-col justify-center items-center'>{error}</div> : <div>
@@ -107,26 +155,30 @@ function App() {
               <div className='p-5 m-5 h-80 w-96 text-white rounded-md relative border border-red-900' style={{ backgroundImage: `url(${quote.image})`, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat" }}>
                 <p className='text-sm my-5'>
                   <FaQuoteLeft />
-                  {quote.year}
+                  {quote.text}
                 </p>
-                <p className='text-sm text-right'>{quote.text}</p>
+                <p className='text-sm text-right'>{quote.year}</p>
                 <p className='flex justify-start absolute bottom-3 w-full left-0'>
                   <button className=' px-3 py-2 w-14  shadow ml-3 bg-white hover:text-gray-400  text-black font-bold flex justify-center' onClick={download}><BsDownload /></button>
                   <button className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center'><FiShare2 /></button>
-                  <button className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center'><SlHeart /></button>
+                  {likes.filter(likedfact => likedfact.text === quote.text).length ?
+                    <button disabled className=' px-3 py-2 w-14 shadow ml-3 bg-white text-red-400 cursor-not-allowed font-bold flex justify-center'><AiFillHeart /></button>
+                    :
+                    <button className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center' onClick={likeQuote}><SlHeart /></button>
+                  }
                 </p>
               </div>}
           </div>
           }
         </div>
         <div className='flex justify-center items-center'>
-          <button className=' px-3 py-2 w-24 rounded-2xl shadow border bg-white hover:text-gray-400    text-black  flex justify-center' onClick={setTodayQuote}>Today</button>
-          <button className=' px-3 py-2 w-24 rounded-2xl shadow ml-5 border bg-white hover:text-gray-400   text-black flex justify-center' onClick={handleFetchRandomQuote}>Random</button>
+          <button className=' px-3 py-2 w-24 rounded-tl-3xl rounded-br-3xl shadow border bg-white hover:text-gray-400    text-black  flex justify-center' onClick={setTodayQuote}>Today</button>
+          <button className=' px-3 py-2 w-24 rounded-tl-3xl rounded-br-3xl  shadow ml-5 border bg-white hover:text-gray-400   text-black flex justify-center' onClick={handleFetchRandomQuote}>Random</button>
         </div>
         <div className='flex flex-col justify-center items-center my-5'>
           <div className='text-slate-400 my-5 w-96'>
-            <p className='quote'><i>"{quote.year}"</i></p>
-            <p className='text-right'>{quote.text}</p>
+            <p className='quote'><i>"{quote.quotation}"</i></p>
+            <p className='text-right'>{quote.author}</p>
           </div>
           <div className='my-5'>
             <p className='text-slate-400'>
@@ -142,5 +194,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
