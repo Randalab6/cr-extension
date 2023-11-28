@@ -18,7 +18,7 @@ export const wrapText = (ctx, text, x, y, maxWidth, lineHeight) => {
 	ctx.fillText(line, x, y);
 }
 
-export const generateCanvas = (quotation, author, imageSize, quoteImage) => {
+export const generateCanvas = (year, text, imageSize, quoteImage) => {
 	let canvas = document.createElement("canvas");
 	canvas.width = imageSize.width;
 	canvas.height = imageSize.height;
@@ -40,11 +40,11 @@ export const generateCanvas = (quotation, author, imageSize, quoteImage) => {
 	image.setAttribute('crossOrigin', 'anonymous');
 	return image.onload = () => {
 			context.drawImage(image, 0, 0, context.width, context.height);
-			wrapText(context, quotation, 0 + x / 4, 0 + y / 4, x, 200)
-			context.fillText('- ' + author, x, y + y / 2);
+			wrapText(context, year, 0 + x / 4, 0 + y / 4, x, 200)
+			context.fillText('- ' + text, x, y + y / 2);
 
-			const text =  "Random Quote Chrome Extension"
-			context.fillText(text, 0, y + (y / 2 + (y / 2) / 1.3))
+			const title =  "On this day Chrome Extension"
+			context.fillText(title, 0, y + (y / 2 + (y / 2) / 1.3))
 			return canvas
 	};
 }

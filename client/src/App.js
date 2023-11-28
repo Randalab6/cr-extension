@@ -11,7 +11,7 @@ import { fetchRandomQuote } from './utils/quotes';
 import { generateCanvas } from './utils/canvas';
 
 function App() {
-  const [quote, setQuote] = useState({ quotation: "", author: "", imageSize: { height: 3648, width: 5472 }, image: "", liked: false });
+  const [quote, setQuote] = useState({ year: "", text: "", imageSize: { height: 3648, width: 5472 }, image: "", liked: false });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [openLikes, setOpenLikes] = useState(false);
@@ -21,33 +21,33 @@ function App() {
   const handleFetchRandomQuote = async () => {
     setError("")
     setLoading(true)
-    const { content: quotation, author, image, error } = await fetchRandomQuote();
+    const { content: year, text, image, error } = await fetchRandomQuote();
     if (error) {
       setError(error);
       setLoading(false);
       return
     }
     setLoading(false);
-    setQuote({ ...quote, quotation, author, image });
-    const canvas = generateCanvas(quotation, author, quote.imageSize, image);
+    setQuote({ ...quote, year, text, image });
+    const canvas = generateCanvas(year, text, quote.imageSize, image);
     setQuoteCanvas(canvas);
   }
 
   const fetchTodayQuote = async () => {
     setError("")
     setLoading(true)
-    const { content: quotation, author, imageSize, image, error } = await fetchRandomQuote();
+    const { content: year, text, imageSize, image, error } = await fetchRandomQuote();
     if (error) {
       setError(error);
       setLoading(false);
       return
     }
     setLoading(false);
-    setQuote({ ...quote, quotation, author, image });
-    const canvas = generateCanvas(quotation, author, quote.imageSize, image);
+    setQuote({ ...quote, year, text, image });
+    const canvas = generateCanvas(year, text, quote.imageSize, image);
     setQuoteCanvas(canvas);
     const timeStamp = Date.now() + 1000 * 60 * 60 * 24 // 60 mins * 24 = 24 hours
-    localStorage.setItem("quoteOfTheDay", JSON.stringify({ quotation, author, timeStamp, imageSize, image }))
+    localStorage.setItem("quoteOfTheDay", JSON.stringify({ year, text, timeStamp, imageSize, image }))
   }
 
   const setTodayQuote = async () => {
@@ -55,15 +55,15 @@ function App() {
     setLoading(false)
     // if there is quote inside localstorage
     if (JSON.parse(localStorage.getItem("quoteOfTheDay"))) {
-      const { author, quotation, image, imageSize, timeStamp } = JSON.parse(localStorage.getItem("quoteOfTheDay"));
+      const { year, text, image, imageSize, timeStamp } = JSON.parse(localStorage.getItem("quoteOfTheDay"));
 
       // if quote has expired
       if (Date.now() > timeStamp) {
         fetchTodayQuote();
         return
       }
-      setQuote({ ...quote, quotation, author, image });
-      const canvas = generateCanvas(quotation, author, quote.imageSize, image);
+      setQuote({ ...quote, text, year, image });
+      const canvas = generateCanvas(text, year, quote.imageSize, image);
       setQuoteCanvas(canvas);
     } else {
       fetchTodayQuote();
@@ -94,7 +94,7 @@ function App() {
   return (
     <div className="font-monteserat flex justify-center items-center">
       <div className=''>
-        <h1 className='heading  text-center text-2xl mt-5  font-bold'>Random Quote Generator</h1>
+        <h1 className='heading  text-center text-2xl mt-5  font-bold'>On this Day</h1>
         <div className='flex flex-col justify-center items-center'>
           <Likes likes={likes} open={openLikes} closeLikes={closeLikes} />
           {error ? <div className='h-80 w-96 m-5 flex flex-col justify-center items-center'>{error}</div> : <div>
@@ -107,9 +107,9 @@ function App() {
               <div className='p-5 m-5 h-80 w-96 text-white rounded-md relative border border-red-900' style={{ backgroundImage: `url(${quote.image})`, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat" }}>
                 <p className='text-sm my-5'>
                   <FaQuoteLeft />
-                  {quote.quotation}
+                  {quote.year}
                 </p>
-                <p className='text-sm text-right'>{quote.author}</p>
+                <p className='text-sm text-right'>{quote.text}</p>
                 <p className='flex justify-start absolute bottom-3 w-full left-0'>
                   <button className=' px-3 py-2 w-14  shadow ml-3 bg-white hover:text-gray-400  text-black font-bold flex justify-center' onClick={download}><BsDownload /></button>
                   <button className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center'><FiShare2 /></button>
@@ -125,8 +125,8 @@ function App() {
         </div>
         <div className='flex flex-col justify-center items-center my-5'>
           <div className='text-slate-400 my-5 w-96'>
-            <p className='quote'><i>"{quote.quotation}"</i></p>
-            <p className='text-right'>{quote.author}</p>
+            <p className='quote'><i>"{quote.year}"</i></p>
+            <p className='text-right'>{quote.text}</p>
           </div>
           <div className='my-5'>
             <p className='text-slate-400'>
