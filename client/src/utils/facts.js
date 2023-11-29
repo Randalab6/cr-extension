@@ -1,10 +1,10 @@
-import { QUOTE_API, unsplash } from "./apis";
+import { FACT_API, unsplash } from "./apis";
 
-// fetch quote
-export const fetchRandomQuote = async () => {
+// fetch fact
+export const fetchRandomFact = async () => {
     try {
-        const res = await fetch(`${QUOTE_API}`);
-        const result = await res.json(); // Ensure you convert the response to JSON
+        const res = await fetch(`${FACT_API}`);
+        const result = await res.json(); 
         // Extracting the date and the first event
         const { date, data: { Events } } = result;
         const firstEvent = Events[0];
@@ -21,7 +21,7 @@ export const fetchRandomQuote = async () => {
                       ? unsplashResponse.response.results[0].urls.regular 
                       : ""; // Fallback value if no image is found
 
-        return { date, year, text, image, error: "" };
+        return { date, text, year, image, error: "" };
     } catch (error) {
         console.error(error); // Log the error for debugging
         return {

@@ -13,11 +13,11 @@ export default function Likes({ open, closeLikes, setFactFromLike, likes }) {
                   likes.map(each => <p
                         key={each._id}
                         onClick={() => {
-                           setFactFromLike(each.year, each.text, each.image);
+                           setFactFromLike(each.text, each.year, each.image);
                            closeLikes();
                         }}
                         className="p-2 my-5 flex justify-between items-center cursor-pointer hover:text-gray-400 hover:border-l-2">
-                        <span className="w-3/4">{each.year.substring(0, 100)}... </span>
+                        <span className="w-3/4">{each.text.substring(0, 100)}... </span>
                         <button className="shadow-md hover:text-gray-400 w-12 h-10 flex justify-center items-center"><BsArrowUpRight /></button>
                   </p>)
                }

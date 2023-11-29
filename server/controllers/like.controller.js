@@ -16,29 +16,29 @@ exports.getAUser = async (req, res) => {
 	}
 };
 
-exports.likeAQuote = async (req, res) => {
+exports.LikeAFact = async (req, res) => {
 	try {
-			const { userId, likedQuote } = req.body;
+			const { userId, likedFact } = req.body;
 			const user = await User.findOne({ userId });
 
 			// If the user doesn't exist
 			if (!user) {
 					const newUser = new User({
 							userId,
-							likes: [likedQuote]
+							likes: [likedFact]
 					});
 					await newUser.save();
 					return res.status(200).json(newUser);
 			}
 
-			// If the user exists, check if the quote is already liked
-			let sameQuote = user.likes.filter(quote => quote.quotation === likedQuote.quotation);
-			if (sameQuote.length) {
+			// If the user exists, check if the fact is already liked
+			let sameFact = user.likes.filter(fact => fact.text === likedFact.text);
+			if (sameFact.length) {
 					return res.status(200).json(user);
 			}
 
 			// Add the new like and update the user
-			user.likes.push(likedQuote);
+			user.likes.push(likedFact);
 			await user.save();
 			return res.status(200).json(user);
 
