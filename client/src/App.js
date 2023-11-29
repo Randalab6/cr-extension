@@ -85,6 +85,12 @@ function App() {
     link.click();
   }
 
+  const share = () => { }
+
+  const closeLikes = () => {
+    setOpenLikes(false)
+  }
+
   const likeFact = async () => {
     try {
       //Get the user ID from the local storage and check if it’s valid or not.
@@ -126,17 +132,34 @@ function App() {
       toast.error(error.message)
     }
   }
+ 
+  const fetchLikes = async () => {
+    const userId = localStorage.getItem("userId");
+    //If the user ID doesn't exist, set the likes state to an empty array and return from the function.
+    if (!userId) {
+       setLikes([]);
+       return;
+    }
 
-
-  const share = () => { }
-
-  const closeLikes = () => {
-    setOpenLikes(false)
-  }
-
-  useEffect(() => {
+    //else, make a request to the /likes endpoint with the userId as a parameter
+    let res = await fetch(`/likes/${userId}`)
+    const { likes } = await res.json();
+    setLikes(likes)
+ }
+ 
+//a function that is whenever a fact is liked that updates the likes and fact state
+ const setFactFromLike = (year, text, image) => {
+    setQuote({ ...quote, year, text, image });
+ }
+ 
+ useEffect(() => {
     setTodayQuote()
-  }, [])
+    fetchLikes()
+ 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+ }, [])
+
+ 
 
   return (
     <div className="font-monteserat flex justify-center items-center">
