@@ -5,5 +5,6 @@ const router = express.Router();
 const { likeAFact } = require("../controllers/like.controller")
 
 router.post("/", likeAFact)
+router.get("/:userId", getAUser)
 
 module.exports = router;
