@@ -18,7 +18,7 @@ export const wrapText = (ctx, text, x, y, maxWidth, lineHeight) => {
 	ctx.fillText(line, x, y);
 }
 
-export const generateCanvas = (year, text, imageSize, factImage) => {
+export const generateCanvas = (text, year, imageSize, factImage) => {
 	let canvas = document.createElement("canvas");
 	canvas.width = imageSize.width;
 	canvas.height = imageSize.height;

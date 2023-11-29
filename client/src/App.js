@@ -34,7 +34,7 @@ function App() {
     }
     setLoading(false);
     setFact({ ...fact, text, year, image });
-    const canvas = generateCanvas(year, text, fact.imageSize, image);
+    const canvas = generateCanvas(text, year, fact.imageSize, image);
     setFactCanvas(canvas);
   }
 
@@ -60,7 +60,7 @@ function App() {
     setLoading(false)
     // if there is fact inside localstorage
     if (JSON.parse(localStorage.getItem("factOfTheDay"))) {
-      const { text, year, image, imageSize, timeStamp } = JSON.parse(localStorage.getItem("factOfTheDay"));
+      const { text, year, image, timeStamp } = JSON.parse(localStorage.getItem("factOfTheDay"));
 
       // if fact has expired
       if (Date.now() > timeStamp) {
@@ -188,12 +188,8 @@ function App() {
                 </p>
                 <p className='text-sm text-right'>{fact.year}</p>
                 <p className='flex justify-start absolute bottom-3 w-full left-0'>
-                  <button className=' px-3 py-2 w-14  shadow ml-3 bg-white hover:text-gray-400  text-black font-bold flex justify-center' onClick={download}>
-                    <BsDownload />
-                  </button>
-                  <button onClick={share} className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center'>
-                    <FiShare2 />
-                  </button>
+                  <button className=' px-3 py-2 w-14  shadow ml-3 bg-white hover:text-gray-400  text-black font-bold flex justify-center' onClick={download}><BsDownload /></button>
+                  <button onClick={share} className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center'><FiShare2 /></button>
                   {likes.filter(likedfact => likedfact.text === fact.text).length ?
                     <button disabled className=' px-3 py-2 w-14 shadow ml-3 bg-white text-red-400 cursor-not-allowed font-bold flex justify-center'><AiFillHeart /></button>
                     :
@@ -210,8 +206,8 @@ function App() {
         </div>
         <div className='flex flex-col justify-center items-center my-5'>
           <div className='text-slate-400 my-5 w-96'>
-            <p className='quote'><i>"{fact.text}"</i></p>
-            <p className='text-right'>{fact.year}</p>
+            <p className='quote'><i>Fact: "{fact.text}"</i></p>
+            <p className='text-right'>Year: {fact.year}</p>
           </div>
           <div className='my-5'>
             <p className='text-slate-400'>
