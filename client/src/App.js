@@ -5,6 +5,7 @@ import { FiShare2 } from "react-icons/fi"
 import { SlHeart } from "react-icons/sl"
 import { AiFillHeart } from "react-icons/ai"
 import { BsArrowUpRight } from "react-icons/bs"
+import "share-api-polyfill"; //to share the fact
 
 import Likes from './Likes';
 import { v4 as uuidv4 } from 'uuid'; //to generate unique identifiers
@@ -85,7 +86,15 @@ function App() {
     link.click();
   }
 
-  const share = () => { }
+  const share = async () => {
+    navigator.share({
+        title: 'On this Day Chrome Extension',
+        text: `"${quote.text}" \n\n\t\t\t\t ${quote.year}`,
+        url: ""
+    })
+      .then(_ => null)
+      .catch(error => alert(error));
+  }
 
   const closeLikes = () => {
     setOpenLikes(false)
@@ -159,15 +168,13 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [])
 
- 
-
   return (
     <div className="font-monteserat flex justify-center items-center">
       <ToastContainer />
       <div>
-        <h1 className='heading  text-center text-2xl mt-5  font-bold'>Random Quote Generator</h1>
+        <h1 className='heading  text-center text-2xl mt-5  font-bold'>On This Day</h1>
         <div className='flex flex-col justify-center items-center'>
-          <Likes likes={likes} open={openLikes} closeLikes={closeLikes} />
+          <Likes likes={likes} open={openLikes} closeLikes={closeLikes} setFactFromLike={setFactFromLike} />
           {error ? <div className='h-80 w-96 m-5 flex flex-col justify-center items-center'>{error}</div> : <div>
             {loading ? <div className='h-80 w-96 m-5 flex flex-col justify-center items-center'>
               <p className="relative flex h-10 w-10 my-3">
@@ -182,12 +189,16 @@ function App() {
                 </p>
                 <p className='text-sm text-right'>{quote.year}</p>
                 <p className='flex justify-start absolute bottom-3 w-full left-0'>
-                  <button className=' px-3 py-2 w-14  shadow ml-3 bg-white hover:text-gray-400  text-black font-bold flex justify-center' onClick={download}><BsDownload /></button>
-                  <button className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center'><FiShare2 /></button>
+                  <button className=' px-3 py-2 w-14  shadow ml-3 bg-white hover:text-gray-400  text-black font-bold flex justify-center' onClick={download}>
+                    <BsDownload />
+                  </button>
+                  <button onClick={share} className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center'>
+                    <FiShare2 />
+                  </button>
                   {likes.filter(likedfact => likedfact.text === quote.text).length ?
                     <button disabled className=' px-3 py-2 w-14 shadow ml-3 bg-white text-red-400 cursor-not-allowed font-bold flex justify-center'><AiFillHeart /></button>
                     :
-                    <button className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center' onClick={likeQuote}><SlHeart /></button>
+                    <button className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center' onClick={likeFact}><SlHeart /></button>
                   }
                 </p>
               </div>}
@@ -210,10 +221,12 @@ function App() {
             </p>
           </div>
           <button onClick={() => { setOpenLikes(prev => !prev); }} className='px-3 py-2 w-fit  shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center items-center'>
-            <span className=''>Liked Quotes</span><BsArrowUpRight />
+            <span className=''>Liked Facts</span><BsArrowUpRight />
           </button>
         </div>
       </div>
     </div>
   );
 }
+
+export default App;
