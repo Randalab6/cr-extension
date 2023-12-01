@@ -8,6 +8,7 @@ import Likes from './Likes';
 import { v4 as uuidv4 } from 'uuid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "share-api-polyfill";
 
 import { fetchRandomFact } from './utils/facts';
 import { generateCanvas } from './utils/canvas';
@@ -73,7 +74,15 @@ const download = async (e) => {
    link.click();
 }
 
-const share = () => { }
+const share = async () => {
+  navigator.share({
+     title: 'On this day extension',
+     text: `"${fact.year}" \n\n\t\t\t\t ${fact.text}`,
+     url: ""
+  })
+     .then(_ => null)
+     .catch(error => alert(error));
+}
 
 const closeLikes = () => {
    setOpenLikes(false)
@@ -166,7 +175,7 @@ return (
                <p className='text-sm text-left'>{fact.text}</p>
                <p className='flex justify-start absolute bottom-3 w-full left-0'>
                   <button className=' px-3 py-2 w-14  shadow ml-3 bg-white hover:text-gray-400  text-black font-bold flex justify-center' onClick={download}><BsDownload /></button>
-                  <button className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center'><FiShare2 /></button>
+                  <button className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center' onClick={share}><FiShare2 /></button>
                   {likes.filter(likedQuote => likedQuote.year === fact.year).length ?
                   <button disabled className=' px-3 py-2 w-14 shadow ml-3 bg-white text-red-400 cursor-not-allowed font-bold flex justify-center'><AiFillHeart /></button>
                   :
