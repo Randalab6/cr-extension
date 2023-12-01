@@ -1,5 +1,5 @@
-export const wrapText = (ctx, text, x, y, maxWidth, lineHeight) => {
-	const words = text.split(' ')
+export const wrapText = (ctx, txt = '', x, y, maxWidth, lineHeight) => {
+	const words = txt.split(' ')
 	let line = '';
 
 	for (var n = 0; n < words.length; n++) {
@@ -40,8 +40,8 @@ export const generateCanvas = (text, year, imageSize, factImage) => {
 	image.setAttribute('crossOrigin', 'anonymous');
 	return image.onload = () => {
 			context.drawImage(image, 0, 0, context.width, context.height);
-			wrapText(context, year, 0 + x / 4, 0 + y / 4, x, 200)
-			context.fillText('- ' + text, x, y + y / 2);
+			wrapText(context, text, 0 + x / 4, 0 + y / 4, x, 200)
+			context.fillText('- ' + year, x, y + y / 2);
 
 			const title =  "On this day Chrome Extension"
 			context.fillText(title, 0, y + (y / 2 + (y / 2) / 1.3))

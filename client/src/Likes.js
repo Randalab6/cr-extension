@@ -13,8 +13,8 @@ export default function Likes({ open, closeLikes, setFactFromLike, likes }) {
                   likes.map(each => <p
                         key={each._id}
                         onClick={() => {
-                           setFactFromLike(each.text, each.year, each.image);
-                           closeLikes();
+                            setFactFromLike(each.year, each.text, each.image);
+                            closeLikes();
                         }}
                         className="p-2 my-5 flex justify-between items-center cursor-pointer hover:text-gray-400 hover:border-l-2">
                         <span className="w-3/4">{each.text.substring(0, 100)}... </span>
@@ -25,9 +25,10 @@ export default function Likes({ open, closeLikes, setFactFromLike, likes }) {
                   && <div className="h-full flex flex-col justify-center items-center">
                         <p className="text-red-400 text-3xl">Oops</p>
                         <MdSearchOff className="text-6xl" />
-                        <p className="text-slate-400">No Liked Fact at the moment!</p>
+                        <p className="text-slate-400">No Liked Facts at the moment!</p>
                   </div>}
             </div>
       </div >
    )
 }
+

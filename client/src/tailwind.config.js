@@ -6,7 +6,7 @@ module.exports = {
   theme: {
       extend: {
           colors: {
-              quoteColor: "#787e8d"
+              quoteColor: "#111213"
           },
           fontFamily: {
               // "crisis": ['Climate Crisis', 'Bebas Neue', 'Montserrat', "cursive"],
