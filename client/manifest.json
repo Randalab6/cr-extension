@@ -1,0 +1,10 @@
+{
+	"name": "On This Day Chrome Extension",
+	"description": "An app that keeps you informed about historical events from around the globe that occurred on this day.",
+	"version": "0.0.0.1",
+	"manifest_version": 3,
+	"action": {
+	"default_popup": "index.html",
+	"default_title": "On This Day Chrome Extension"
+	}
+}
