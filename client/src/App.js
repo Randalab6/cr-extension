@@ -117,12 +117,12 @@ const likeFact = async () => {
          imageSize
       }
       }
-      await fetch("/likes/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-      })
-
+      //backend URL
+      await fetch("http://172.17.0.2:8000/likes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+     })
       //Update the likes state
       setLikes([...likes, { year, text, image, imageSize }])
       toast.success("Quote liked successfully")
@@ -138,7 +138,7 @@ const fetchLikes = async () => {
       setLikes([]);
       return;
    }
-   let res = await fetch(`/likes/${userId}`)
+   let res = await fetch(`http://172.17.0.2:8000/likes/${userId}`)
    const { likes } = await res.json();
    setLikes(likes)
 }
