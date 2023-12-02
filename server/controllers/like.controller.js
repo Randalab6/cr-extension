@@ -16,7 +16,7 @@ exports.getAUser = async (req, res) => {
 	}
 };
 
-exports.likeAFact = async (req, res) => {
+exports.likeAfact = async (req, res) => {
 	try {
 			// Get the user ID and the like object from the request body
 			const { userId, likedFact } = req.body;
