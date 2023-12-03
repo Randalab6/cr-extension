@@ -149,7 +149,7 @@ const setFactFromLike = (year, text, image) => {
 
 useEffect(() => {
   fetchTodayFact(0)
-  fetchLikes()
+//   fetchLikes()
 
    // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
