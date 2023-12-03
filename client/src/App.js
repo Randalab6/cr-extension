@@ -187,22 +187,16 @@ return (
          }
       </div>
       <div className='flex justify-center items-center'>
-         <button className=' px-3 py-2 w-24 rounded-tl-3xl rounded-br-3xl  shadow ml-5 border bg-white hover:text-gray-400   text-black flex justify-center' onClick={(e) => handleFetchRandomQuote(e)}>Random</button>
+         <button className='px-3 py-2 w-fit  shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center items-center' onClick={(e) => handleFetchRandomQuote(e)}>Generate Another Fact</button>
+         <button onClick={() => { setOpenLikes(prev => !prev); }} className='px-3 py-2 w-fit  shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center items-center'>
+            <span className=''>Liked Facts</span><BsArrowUpRight />
+         </button>
       </div>
       <div className='flex flex-col justify-center items-center my-5'>
          <div className='text-slate-400 my-5 w-96'>
             <p className='text-center'><i>In the year {fact.year}</i></p>
             <p className='text-center'>{fact.text}</p>
          </div>
-         <div className='my-5'>
-            <p className='text-slate-400'>
-            Images are from unsplash {"  "}
-            <a href={`${fact.image}`} className='text-red-400' target="_blank" rel="noreferrer">See Image Here</a>
-            </p>
-         </div>
-         <button onClick={() => { setOpenLikes(prev => !prev); }} className='px-3 py-2 w-fit  shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center items-center'>
-            <span className=''>Liked Facts</span><BsArrowUpRight />
-         </button>
       </div>
       </div>
    </div>
