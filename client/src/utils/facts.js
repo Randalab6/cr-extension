@@ -7,9 +7,12 @@ function extractRelevantKeywords(text) {
     let words = text.match(/\b(\w+)\b/g).filter(word => {
         return !stopwords.includes(word.toLowerCase()) && /^[a-zA-Z]+$/.test(word);
     });
-    const refinedWords = words.filter(word => word.length > 3);
-    refinedWords.sort((a, b) => b.length - a.length);
-    return refinedWords.slice(0, 3);
+
+    // Sort by word length or another criterion indicating relevance
+    words.sort((a, b) => b.length - a.length);
+
+    // Return the top 2 words
+    return words.slice(0, 2);
 }
 
 
@@ -18,14 +21,15 @@ export const fetchRandomFact = async (n) => {
     try {
         const res = await fetch(`${FACT_API}`);
         const result = await res.json();
+        console.log("API response:", result);
         const { date, data: { Events } } = result;
         const firstEvent = Events[n];
         const { year, text } = firstEvent;
-
+        
         // Use the extractRelevantKeywords function
         const keywords = extractRelevantKeywords(text);
-        const query = keywords.join(' ') + ' historical';
-
+        const query = keywords.join(' ');
+        
         const unsplashResponse = await unsplash.search.getPhotos({
             query: query, pages: 1, perPage: 1
         });
@@ -33,6 +37,7 @@ export const fetchRandomFact = async (n) => {
 
         return { date, text, year, image, error: "" }
     } catch (error) {
+
         return {
             error: "Something Went Wrong! Please check internet connection or refresh!",
             date: "",

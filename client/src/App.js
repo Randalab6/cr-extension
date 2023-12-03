@@ -15,53 +15,38 @@ import { generateCanvas } from './utils/canvas';
 
 function App() {
 const [fact, setFact] = useState({ year: "", text: "", imageSize: { height: 3648, width: 5472 }, image: "", liked: false });
+// const [factIndex, setFactIndex] = useState(0);
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState("");
 const [openLikes, setOpenLikes] = useState(false);
 const [likes, setLikes] = useState([]);
 const [factCanvas, setFactCanvas] = useState("");
 
-const fetchTodayFact = async (n) => {
-  setLoading(true);
-  try {
-      const response = await fetchRandomFact(n);
-      if (response.error) {
-          setError(response.error);
-      } else {
-          const { year, text, image } = response;
-          setFact({ year, text, image, imageSize: fact.imageSize });
-          const canvas = generateCanvas(year, text, fact.imageSize, image);
-          setFactCanvas(canvas);
-      }
-  } catch (error) {
-      setError("An error occurred while fetching the fact.");
-  } finally {
-      setLoading(false);
-  }
+const fetchTodayFact = async () => {
+   setLoading(true);
+   setError(""); // Clear previous errors
+   try {
+       const randomIndex = Math.floor(Math.random() * 20); // Adjust the range as needed
+       const newFact = await fetchRandomFact(randomIndex);
+       if (newFact.error) {
+           setError(newFact.error);
+       } else {
+           const { year, text, image } = newFact;
+           setFact({ year, text, image, imageSize: fact.imageSize });
+           const canvas = generateCanvas(year, text, fact.imageSize, image);
+           setFactCanvas(canvas);
+       }
+   } catch (error) {
+       setError("An error occurred while fetching the fact.");
+   } finally {
+       setLoading(false);
+   }
 };
 
-const handleFetchRandomQuote = async (e) => {
-  e.preventDefault();  // This will prevent the default action of the event
-
-  setLoading(true);
-  setError(""); // Clear previous errors
-  try {
-      const newFact = await fetchRandomFact(Math.floor(Math.random() * 100));
-      if (newFact.error) {
-          setError(newFact.error);
-      } else {
-          const { year, text, image } = newFact;
-          setFact({ year, text, image, imageSize: fact.imageSize });
-          const canvas = generateCanvas(year, text, fact.imageSize, image);
-          setFactCanvas(canvas);
-      }
-  } catch (error) {
-      setError("An error occurred while fetching the fact.");
-  } finally {
-      setLoading(false);
-  }
+const handleFetchRandomFact = async (e) => {
+   e.preventDefault(); // Prevent default form submission behavior
+   fetchTodayFact();
 };
-
 
 
 const download = async (e) => {
@@ -148,9 +133,8 @@ const setFactFromLike = (year, text, image) => {
 }
 
 useEffect(() => {
-  fetchTodayFact(0)
-//   fetchLikes()
-
+   // fetchTodayFact();
+   //   fetchLikes()
    // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [])
 
@@ -158,7 +142,8 @@ return (
    <div className="font-monteserat flex justify-center items-center">
       <ToastContainer />
       <div>
-      <h1 className='heading  text-center text-2xl mt-5  font-bold'>On this day</h1>
+      <h1 className='heading  text-center text-2xl mt-5  font-bold'>On This Day</h1>
+      {fact.year ? <h3 className='heading text-center text-xl mt-3 font-bold'>in the year {fact.year} </h3> : null}
       <div className='flex flex-col justify-center items-center'>
          <Likes likes={likes} open={openLikes} closeLikes={closeLikes} setFactFromLike={setFactFromLike} />
          {error ? <div className='h-80 w-96 m-5 flex flex-col justify-center items-center'>{error}</div> : <div>
@@ -169,9 +154,6 @@ return (
             </p>
             </div> :
             <div className='p-5 m-5 h-80 w-96 text-white rounded-md relative border border-red-900' style={{ backgroundImage: `url(${fact.image})`, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat" }}>
-              <p className= 'py-2  text-sm text-left'>
-                 Year: {fact.year}
-               </p> 
                <p className='text-sm text-left'>{fact.text}</p>
                <p className='flex justify-start absolute bottom-3 w-full left-0'>
                   <button className=' px-3 py-2 w-14  shadow ml-3 bg-white hover:text-gray-400  text-black font-bold flex justify-center' onClick={download}><BsDownload /></button>
@@ -187,7 +169,7 @@ return (
          }
       </div>
       <div className='flex justify-center items-center'>
-         <button className='px-3 py-2 w-fit  shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center items-center' onClick={(e) => handleFetchRandomQuote(e)}>Generate Another Fact</button>
+         <button className='px-3 py-2 w-fit  shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center items-center' onClick={(e) => handleFetchRandomFact(e)}>Generate Another Fact</button>
          <button onClick={() => { setOpenLikes(prev => !prev); }} className='px-3 py-2 w-fit  shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center items-center'>
             <span className=''>Liked Facts</span><BsArrowUpRight />
          </button>
