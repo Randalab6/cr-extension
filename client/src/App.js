@@ -4,6 +4,7 @@ import { FiShare2 } from 'react-icons/fi'
 import { SlHeart } from 'react-icons/sl'
 import { AiFillHeart } from 'react-icons/ai'
 import { BsArrowUpRight } from 'react-icons/bs'
+import { IoMdRefresh } from "react-icons/io";
 import Likes from './Likes'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -61,7 +62,7 @@ function App() {
 	}
 
 	const share = async () => {
-		if (navigator.share) { 
+		if (navigator.share) {
 			navigator
 				.share({
 					title: 'On this day extension',
@@ -86,14 +87,9 @@ function App() {
 		<div className='font-monteserat flex justify-center items-center'>
 			<ToastContainer />
 			<div>
-				<h1 className='heading  text-center text-2xl mt-5  font-bold'>
+				<h1 className='text-center text-2xl mt-5 font-bold'>
 					On This Day
 				</h1>
-				{fact.year ? (
-					<h3 className='heading text-center text-xl mt-3 font-bold'>
-						in the year {fact.year}{' '}
-					</h3>
-				) : null}
 				<div className='flex flex-col justify-center items-center'>
 					<Likes
 						likes={likes}
@@ -116,43 +112,41 @@ function App() {
 								</div>
 							) : (
 								<div
-									className='p-5 m-5 h-80 w-96 text-white rounded-md relative border border-red-900'
+									className='relative p-5 m-5 h-80 w-96 rounded-md border border-red-900'
 									style={{
 										backgroundImage: `url(${fact.image})`,
 										backgroundSize: '100% 100%',
 										backgroundRepeat: 'no-repeat',
 									}}>
-									<p className='text-sm text-left'>
+									<p className='text-left px-1 bg-white rounded-md'>
+										In the year {fact.year}
+										<br />
 										{fact.text}
 									</p>
-									<p className='flex justify-start absolute bottom-3 w-full left-0'>
+									<div className='absolute bottom-5 right-2 flex flex-col items-center justify-center space-y-3'>
 										<button
-											className=' px-3 py-2 w-14  shadow ml-3 bg-white hover:text-gray-400  text-black font-bold flex justify-center'
+											className='p-2 rounded-full bg-white text-black hover:text-gray-400 shadow'
+											onClick={handleLikeFact}>
+											{likes.filter(
+												(likedFact) =>
+													likedFact.year === fact.year
+											).length ? (
+												<AiFillHeart />
+											) : (
+												<SlHeart />
+											)}
+										</button>
+										<button
+											className='p-2 rounded-full bg-white text-black hover:text-gray-400 shadow'
 											onClick={download}>
 											<BsDownload />
 										</button>
 										<button
-											className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center'
+											className='p-2 rounded-full bg-white text-black hover:text-gray-400 shadow'
 											onClick={share}>
 											<FiShare2 />
 										</button>
-										{likes.filter(
-											(likedQuote) =>
-												likedQuote.year === fact.year
-										).length ? (
-											<button
-												disabled
-												className=' px-3 py-2 w-14 shadow ml-3 bg-white text-red-400 cursor-not-allowed font-bold flex justify-center'>
-												<AiFillHeart />
-											</button>
-										) : (
-											<button
-												className=' px-3 py-2 w-14 shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center'
-												onClick={handleLikeFact}>
-												<SlHeart />
-											</button>
-										)}
-									</p>
+									</div>
 								</div>
 							)}
 						</div>
@@ -160,25 +154,30 @@ function App() {
 				</div>
 				<div className='flex justify-center items-center'>
 					<button
-						className='px-3 py-2 w-fit  shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center items-center'
+						className='px-3 py-2 w-fit shadow ml-3 bg-white text-black hover:text-gray-400 flex justify-center items-center'
 						onClick={(e) => handleFetchRandomFact(e)}>
-						Generate Another Fact
+						<span className ='px-1'>New Fact </span>
+						<IoMdRefresh />
 					</button>
-					<button
-						onClick={() => {
-							setOpenLikes((prev) => !prev)
-						}}
-						className='px-3 py-2 w-fit  shadow ml-3 bg-white text-black hover:text-gray-400 font-bold flex justify-center items-center'>
-						<span className=''>Liked Facts</span>
-						<BsArrowUpRight />
-					</button>
+				
+				<button
+					onClick={() =>
+						setOpenLikes((prev) => !prev)
+					}
+					className='px-3 py-2 w-fit shadow ml-3 bg-white text-black hover:text-gray-400 flex justify-center items-center'>
+					<span className='px-1'>View Liked</span>
+					<AiFillHeart />
+				</button>
 				</div>
 				<div className='flex flex-col justify-center items-center my-5'>
-					<div className='text-slate-400 my-5 w-96'>
-						<p className='text-center'>
-							<i>In the year {fact.year}</i>
-						</p>
-						<p className='text-center'>{fact.text}</p>
+					<div className='text-slate-400 px-3 py-2 w-fit'>
+						<a
+							href='https://en.wikipedia.org/'
+							target='_blank'
+							rel='noopener noreferrer'
+							className='text-black-500 underline'>
+							Learn more on Wikipedia
+						</a>
 					</div>
 				</div>
 			</div>
