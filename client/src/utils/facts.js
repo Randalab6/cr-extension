@@ -21,19 +21,19 @@ export const fetchRandomFact = async (n) => {
     try {
         const res = await fetch(`${FACT_API}`);
         const result = await res.json();
-        console.log("API response:", result);
         const { date, data: { Events } } = result;
         const firstEvent = Events[n];
         const { year, text } = firstEvent;
         
         // Use the extractRelevantKeywords function
         const keywords = extractRelevantKeywords(text);
-        const query = keywords.join(' ');
-        
+        // const query = keywords.join(' ');
+        const query = 'book'; 
+
         const unsplashResponse = await unsplash.search.getPhotos({
             query: query, pages: 1, perPage: 1
         });
-        const image = unsplashResponse.response.results[0]?.urls.regular || 'defaultImageURL'; // Fallback image URL
+        const image = unsplashResponse.response.results[0]?.urls.regular  // Fallback image URL
 
         return { date, text, year, image, error: "" }
     } catch (error) {
