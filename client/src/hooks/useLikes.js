@@ -7,7 +7,7 @@ export const useLikes = () => {
     const [likes, setLikes] = useState([]);
 
     useEffect(() => {
-        // fetchLikes();
+        fetchLikes();
     }, []);
 
     const fetchLikes = async () => {

@@ -4,7 +4,7 @@
 	"version": "0.0.0.1",
 	"manifest_version": 3,
 	"action": {
-		"default_popup": "index.html",
-		"default_title": "On This Day Chrome Extension"
+	"default_popup": "index.html",
+	"default_title": "On This Day Chrome Extension"
 	}
 }
