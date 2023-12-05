@@ -4,15 +4,15 @@ import { FACT_API, unsplash } from "./apis";
 // Function to extract relevant keywords from the text
 function extractRelevantKeywords(text) {
     const stopwords = ['the', 'in', 'on', 'at', 'of', 'and', 'a', 'to', 'for', 'with', 'is', 'was', 'were', 'by', 'as', 'an', 'are', 'this', 'that', 'it', 'from', 'be', 'have', 'has', 'had', 'do', 'did', 'but', 'about', 'not', 'or', 'if', 'they', 'their', 'them', 'been', 'can', 'all', 'any', 'will', 'also', 'your', 'you', 'I', 'my', 'me', 'we', 'our', 'us', 'he', 'she', 'him', 'her', 'his', 'hers', 'its', 'who', 'whom', 'which', 'what', 'where', 'when', 'why', 'how'];
-    let words = text.match(/\b(\w+)\b/g).filter(word => {
-        return !stopwords.includes(word.toLowerCase()) && /^[a-zA-Z]+$/.test(word);
-    });
 
+    let words = text.match(/\b(\w+)\b/g).filter(word => {
+        return /^[A-Z]/.test(word) && !stopwords.includes(word) && /^[a-zA-Z]+$/.test(word);
+    });
     // Sort by word length or another criterion indicating relevance
     words.sort((a, b) => b.length - a.length);
 
     // Return the top 2 words
-    return words.slice(0, 2);
+    return words.slice(0, 3);
 }
 
 
