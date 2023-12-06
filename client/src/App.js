@@ -3,7 +3,7 @@ import { BsDownload } from 'react-icons/bs'
 import { FiShare2 } from 'react-icons/fi'
 import { SlHeart } from 'react-icons/sl'
 import { AiFillHeart } from 'react-icons/ai'
-import { BsArrowUpRight } from 'react-icons/bs'
+// import { BsArrowUpRight } from 'react-icons/bs'
 import { IoMdRefresh } from "react-icons/io";
 import Likes from './Likes'
 import { ToastContainer } from 'react-toastify'
