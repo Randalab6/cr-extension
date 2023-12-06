@@ -3,7 +3,6 @@ import { BsDownload } from 'react-icons/bs'
 import { FiShare2 } from 'react-icons/fi'
 import { SlHeart } from 'react-icons/sl'
 import { AiFillHeart } from 'react-icons/ai'
-// import { BsArrowUpRight } from 'react-icons/bs'
 import { IoMdRefresh } from "react-icons/io";
 import Likes from './Likes'
 import { ToastContainer } from 'react-toastify'
@@ -11,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import 'share-api-polyfill'
 import { generateCanvas } from './utils/canvas'
 import { useFetchFact, useLikes } from './hooks'
+import { todayFormatted } from './utils/dateUtils'
 
 function App() {
 	const { fact, loading, error, fetchFact, setFact } = useFetchFact()
@@ -172,11 +172,11 @@ function App() {
 				<div className='flex flex-col justify-center items-center my-5'>
 					<div className='text-slate-400 px-3 py-2 w-fit'>
 						<a
-							href='https://en.wikipedia.org/'
+							href={`https://en.wikipedia.org/wiki/${todayFormatted}`}
 							target='_blank'
 							rel='noopener noreferrer'
 							className='text-black-500 underline'>
-							Learn more on Wikipedia
+							 	 Learn more about today's history on Wikipedia
 						</a>
 					</div>
 				</div>

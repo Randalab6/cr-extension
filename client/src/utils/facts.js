@@ -1,5 +1,6 @@
 // Import necessary APIs and libraries
 import { FACT_API, unsplash } from "./apis";
+import { monthDayFormatted } from "./dateUtils";
 
 // Function to extract relevant keywords from the text
 function extractRelevantKeywords(text) {
@@ -19,9 +20,8 @@ function extractRelevantKeywords(text) {
 // Main function to fetch a random fact and an associated image
 export const fetchRandomFact = async (n) => {
     try {
-        const res = await fetch(`${FACT_API}`);
+        const res = await fetch(`${FACT_API}/${monthDayFormatted}`);
         const result = await res.json();
-        console.log("API response:", result);
         const { date, data: { Events } } = result;
         const firstEvent = Events[n];
         const { year, text } = firstEvent;
