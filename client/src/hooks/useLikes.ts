@@ -10,8 +10,12 @@ interface Fact {
   liked: boolean;
 }
 
+interface LikedFact extends Fact {
+  _id: string;
+}
+
 export const useLikes = () => {
-  const [likes, setLikes] = useState<Fact[]>([]);
+  const [likes, setLikes] = useState<LikedFact[]>([]);
 
   useEffect(() => {
     fetchLikes();
@@ -34,11 +38,9 @@ export const useLikes = () => {
   };
 
   const addLike = async (fact: Fact) => {
-    let userId = localStorage.getItem("userId");
-    if (!userId) {
-      userId = uuidv4();
-      localStorage.setItem("userId", userId);
-    }
+    //Get the existing userId from localStorage, or create a new one if it's not there (null or undefined).
+    let userId = localStorage.getItem("userId") || uuidv4();
+    localStorage.setItem("userId", userId);
 
     const sameFact = likes.find(like => like.year === fact.year);
     if (sameFact) {
@@ -54,7 +56,8 @@ export const useLikes = () => {
       });
 
       if (response.ok) {
-        setLikes([...likes, fact]);
+        const likedFact: LikedFact = { ...fact, _id: uuidv4() }; // Add _id here
+        setLikes([...likes, likedFact]);
         toast.success("Quote liked successfully");
       }
     } catch (error) {
