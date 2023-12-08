@@ -1,88 +1,95 @@
-import React, { useEffect, useState } from 'react'
-import { BsDownload } from 'react-icons/bs'
-import { FiShare2 } from 'react-icons/fi'
-import { SlHeart } from 'react-icons/sl'
-import { AiFillHeart } from 'react-icons/ai'
+import React, { useEffect, useState } from 'react';
+import { BsDownload } from 'react-icons/bs';
+import { FiShare2 } from 'react-icons/fi';
+import { SlHeart } from 'react-icons/sl';
+import { AiFillHeart } from 'react-icons/ai';
 import { IoMdRefresh } from "react-icons/io";
-import Likes from './Likes'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import 'share-api-polyfill'
-import { generateCanvas } from './utils/canvas'
-import { useFetchFact, useLikes } from './hooks'
-import { todayFormatted } from './utils/dateUtils'
+import Likes from './Likes';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import 'share-api-polyfill';
+import { generateCanvas } from './utils/canvas';
+import { useFetchFact, useLikes } from './hooks';
+import { todayFormatted } from './utils/dateUtils';
+
+interface Fact {
+  year: string;
+  text: string;
+  image: string;
+  imageSize: { width: number; height: number };
+}
 
 function App() {
-	const { fact, loading, error, fetchFact, setFact } = useFetchFact()
-	const { likes, addLike } = useLikes()
+  const { fact, loading, error, fetchFact, setFact } = useFetchFact();
+  const { likes, addLike } = useLikes();
 
-	const [openLikes, setOpenLikes] = useState(false)
-	const [factCanvas, setFactCanvas] = useState('')
+  const [openLikes, setOpenLikes] = useState<boolean>(false);
+  const [factCanvas, setFactCanvas] = useState<HTMLCanvasElement | null>(null);
 
-	useEffect(() => {
-		fetchFact()
-	}, [])
+  useEffect(() => {
+    fetchFact();
+  }, [fetchFact]);
 
-	useEffect(() => {
-		if (fact.year && fact.text && fact.image) {
-			const canvas = generateCanvas(
-				fact.year,
-				fact.text,
-				fact.imageSize,
-				fact.image
-			)
-			setFactCanvas(canvas)
-		}
-	}, [fact])
+  useEffect(() => {
+    if (fact.year && fact.text && fact.image) {
+      const canvas = generateCanvas(
+        fact.year,
+        fact.text,
+        fact.imageSize,
+        fact.image
+      );
+      setFactCanvas(canvas);
+    }
+  }, [fact]);
 
-	const handleFetchRandomFact = (e) => {
-		e.preventDefault() // Prevent default form submission behavior
-		fetchFact()
-	}
+  const handleFetchRandomFact = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    fetchFact();
+  };
 
-	const handleLikeFact = () => {
-		addLike({
-			year: fact.year,
-			text: fact.text,
-			image: fact.image,
-			imageSize: fact.imageSize,
-		})
-	}
+  const handleLikeFact = () => {
+    addLike({
+      year: fact.year,
+      text: fact.text,
+      image: fact.image,
+      imageSize: fact.imageSize,
+    });
+  };
 
-	const download = async (e) => {
-		e.preventDefault()
-		e.stopPropagation()
-		if (factCanvas) {
-			let canvasLink = factCanvas.toDataURL('image/jpeg')
-			let link = document.createElement('a')
-			link.href = canvasLink
-			link.setAttribute('download', 'download')
-			link.click()
-		}
-	}
+  const download = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (factCanvas) {
+      const canvasLink = factCanvas.toDataURL('image/jpeg');
+      const link = document.createElement('a');
+      link.href = canvasLink;
+      link.setAttribute('download', 'download');
+      link.click();
+    }
+  };
 
-	const share = async () => {
-		if (navigator.share) {
-			navigator
-				.share({
-					title: 'On this day extension',
-					text: `"${fact.year}" \n\n\t\t\t\t ${fact.text}`,
-					url: '',
-				})
-				.catch((error) => {
-					console.error('Error sharing:', error)
-				})
-		}
-	}
+  const share = async () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: 'On this day extension',
+          text: `"${fact.year}" \n\n\t\t\t\t ${fact.text}`,
+          url: '',
+        })
+        .catch((error) => {
+          console.error('Error sharing:', error);
+        });
+    }
+  };
 
-	const setFactFromLike = (likedFact) => {
-		setFact({ ...fact, ...likedFact })
-	}
+  const setFactFromLike = (likedFact: Fact) => {
+    setFact({ ...fact, ...likedFact });
+  };
 
-	const closeLikes = () => {
-		setOpenLikes(false)
-	}
-
+  const closeLikes = () => {
+    setOpenLikes(false);
+  };
+	
 	return (
 		<div className='font-monteserat flex justify-center items-center'>
 			<ToastContainer />

@@ -61,3 +61,5 @@ const Likes: React.FC<LikesProps> = ({ open, closeLikes, setFactFromLike, likes 
 		</div>
 	)
 }
+
+export default Likes
