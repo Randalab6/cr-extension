@@ -2250,6 +2250,13 @@
   resolved "https://registry.yarnpkg.com/@types/trusted-types/-/trusted-types-2.0.7.tgz#baccb07a970b91707df3a3e8ba6896c57ead2d11"
   integrity sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==
 
+"@types/unsplash-js@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@types/unsplash-js/-/unsplash-js-7.0.0.tgz#f8cea8a4fb8674d664c6311a863d510b1721cb53"
+  integrity sha512-RldrakAXGJqBLTpaVDHNdIHr/LsjZCnQ5SIQ8JX1pMXSZZeNuVaCR8tJf92pZGUOpO/P8nTJ6gg7yf56zczPKg==
+  dependencies:
+    unsplash-js "*"
+
 "@types/ws@^8.5.5":
   version "8.5.10"
   resolved "https://registry.yarnpkg.com/@types/ws/-/ws-8.5.10.tgz#4acfb517970853fa6574a3a6886791d04a396787"
@@ -9217,7 +9224,7 @@ unquote@~1.1.1:
   resolved "https://registry.yarnpkg.com/unquote/-/unquote-1.1.1.tgz#8fded7324ec6e88a0ff8b905e7c098cdc086d544"
   integrity sha512-vRCqFv6UhXpWxZPyGDh/F3ZpNv8/qo7w6iufLpQg9aKnQ71qM4B5KiI7Mia9COcjEhrO9LueHpMYjYzsWH3OIg==
 
-unsplash-js@^7.0.15:
+unsplash-js@*, unsplash-js@^7.0.15:
   version "7.0.18"
   resolved "https://registry.yarnpkg.com/unsplash-js/-/unsplash-js-7.0.18.tgz#7974fcf483b76045822438e1980145dbd42a15fd"
   integrity sha512-R3HTszj9EFWVqubcI+ncukGJ4JusWLBKGk5ZbT7ZYcUjNpa5VkHgTh2qu2pWEVX00Br7OI9z60zyoIMVKXhrWg==
