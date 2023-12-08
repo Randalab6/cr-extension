@@ -12,15 +12,8 @@ import { generateCanvas } from './utils/canvas';
 import { useFetchFact, useLikes } from './hooks';
 import { todayFormatted } from './utils/dateUtils';
 
-interface Fact {
-  year: string;
-  text: string;
-  image: string;
-  imageSize: { width: number; height: number };
-}
-
-function App() {
-  const { fact, loading, error, fetchFact, setFact } = useFetchFact();
+const App: React.FC = () => {
+  const { fact, setFact, fetchFact, loading, error } = useFetchFact();
   const { likes, addLike } = useLikes();
 
   const [openLikes, setOpenLikes] = useState<boolean>(false);
@@ -30,17 +23,19 @@ function App() {
     fetchFact();
   }, [fetchFact]);
 
-  useEffect(() => {
-    if (fact.year && fact.text && fact.image) {
-      const canvas = generateCanvas(
-        fact.year,
-        fact.text,
-        fact.imageSize,
-        fact.image
-      );
-      setFactCanvas(canvas);
-    }
-  }, [fact]);
+	useEffect(() => {
+		if (fact.year && fact.text && fact.image) {
+			const canvas = generateCanvas(
+				fact.year,
+				fact.text,
+				fact.imageSize,
+				fact.image
+			);
+			if (canvas) {
+				setFactCanvas(canvas);
+			}
+		}
+	}, [fact]);
 
   const handleFetchRandomFact = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -48,13 +43,14 @@ function App() {
   };
 
   const handleLikeFact = () => {
-    addLike({
-      year: fact.year,
-      text: fact.text,
-      image: fact.image,
-      imageSize: fact.imageSize,
-    });
-  };
+		addLike({
+			year: fact.year,
+			text: fact.text,
+			image: fact.image,
+			imageSize: fact.imageSize,
+			liked: true, 
+		});
+	};
 
   const download = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -82,8 +78,8 @@ function App() {
     }
   };
 
-  const setFactFromLike = (likedFact: Fact) => {
-    setFact({ ...fact, ...likedFact });
+	const setFactFromLike = (year: string, text: string, image: string) => {
+    setFact({ ...fact, year, text, image, liked: fact.liked });
   };
 
   const closeLikes = () => {
@@ -101,8 +97,8 @@ function App() {
 					<Likes
 						likes={likes}
 						open={openLikes}
-						closeLikes={closeLikes}
 						setFactFromLike={setFactFromLike}
+						closeLikes={closeLikes}
 					/>
 					{error ? (
 						<div className='h-80 w-96 m-5 flex flex-col justify-center items-center'>
