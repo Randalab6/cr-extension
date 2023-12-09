@@ -5,13 +5,13 @@
 		"engines": {
 				"node": "*"
 		},
-		"main": "app.js",
+		"main": "app.ts",
 		"scripts": {
-				"start": "node app.js",
+				"start": "node app.ts",
 				"heroku-postbuild": "cd ../client && npm install && npm run build",
 				"client": "cd ../client && npm start",
 				"build": "cd ../client && npm run build",
-				"server": "nodemon app.js"
+				"server": "nodemon app.ts"
 		},
 		"author": "Randala K. Abraham",
 		"license": "ISC",
@@ -27,6 +27,7 @@
 				"@types/mongoose": "^5.11.97",
 				"@types/node": "^20.10.4",
 				"nodemon": "^1.17.3",
+				"ts-node": "^10.9.2",
 				"typescript": "^5.3.3"
 		}
 }
