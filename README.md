@@ -1,6 +1,13 @@
-# On This Day Chrome Extension
+<h1 align="center" style="font-size: 2.5em;">On This Day Chrome Extension</h1>
 
+<div align="center">
+    <img src="https://github.com/Randalab6/cr-extension/assets/31637771/f10ff793-deda-4859-a7dd-a6ed1fdd5a38" alt="logo" width="100" height="100" style=padding-bottom: 60%;">
+</div>
+
+
+  
 "On This Day" is a Chrome extension that retrieves and displays historical events that took place on the current date.
+
 
 ## Features
 
@@ -10,7 +17,7 @@
 - Share events with friends or on social media.
 - Easily retrieve new events with a click, refreshing your daily historical insights.
 
-## Technologies Used
+## Technologies 
 
 - TypeScript
 - React
@@ -19,10 +26,6 @@
 - Unsplash JS API
 - Wikipedia API
 - MongoDB
-
-## Setup and Installation
-
-Instructions on setting up the project locally.
 
 ## Setup and Installation
 
