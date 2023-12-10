@@ -1,6 +1,6 @@
 import React from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
-import { BsArrowUpRight } from 'react-icons/bs';
+import { FaEye } from "react-icons/fa6";
 import { MdSearchOff } from 'react-icons/md';
 
 // Define an interface for the props
@@ -44,7 +44,7 @@ const Likes: React.FC<LikesProps> = ({ open, closeLikes, setFactFromLike, likes 
 							{each.text.substring(0, 100)}...{' '}
 						</span>
 						<button className='shadow-md hover:text-gray-400 w-12 h-10 flex justify-center items-center'>
-							<BsArrowUpRight />
+							<FaEye  />
 						</button>
 					</p>
 				))}
