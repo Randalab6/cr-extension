@@ -29,7 +29,7 @@ export const useLikes = () => {
     }
 
     try {
-      const response = await fetch(`http://172.17.0.2:8000/likes/${userId}`);
+      const response = await fetch(`http://127.0.0.1:8000/likes/${userId}`);
       const data = await response.json();
       setLikes(data.likes);
     } catch (error) {
@@ -49,16 +49,16 @@ export const useLikes = () => {
     }
 
     try {
-      const response = await fetch("http://172.17.0.2:8000/likes", {
+      const response = await fetch("http://127.0.0.1:8000/likes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, likedQuote: fact })
+        body: JSON.stringify({ userId, likedFact: fact })
       });
 
       if (response.ok) {
         const likedFact: LikedFact = { ...fact, _id: uuidv4() }; // Add _id here
         setLikes([...likes, likedFact]);
-        toast.success("Quote liked successfully");
+        toast.success("Fact liked successfully");
       }
     } catch (error) {
       toast.error("Error liking the fact");
