@@ -8,9 +8,11 @@ import likeRouter from './routes/like.router';
 
 dotenv.config();
 
-const MONGO_URL = process.env.MONGODB_ATLAS_URL;
+const username = process.env.MONGODB_USERNAME;
+const encodedPassword = encodeURIComponent(process.env.MONGODB_PASS!);
+const connectionString = `mongodb+srv://${username}:${encodedPassword}@cluster0.10vnscl.mongodb.net/?retryWrites=true&w=majority`;
 
-mongoose.connect(MONGO_URL!, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
    .then(() => console.log("Database connected successfully!"))
    .catch(err => console.error("Could not connect to database", err));
 

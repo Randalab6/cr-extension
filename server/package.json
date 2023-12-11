@@ -7,7 +7,7 @@
 		},
 		"main": "app.ts",
 		"scripts": {
-				"start": "node app.ts",
+				"start": "ts-node app.ts",
 				"heroku-postbuild": "cd ../client && npm install && npm run build",
 				"client": "cd ../client && npm start",
 				"build": "cd ../client && npm run build",
