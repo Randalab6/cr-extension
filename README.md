@@ -3,8 +3,7 @@
 </div>
 
 
-<p align="center"> **On This Day Chrome Extension** </p>
-
+<p align="center" style="font-size: larger;"><strong>On This Day </strong></p>
 
 
 ## Description
@@ -16,11 +15,11 @@ This is a living and expermintal project, constantly evolving with new features 
 
 ## Features
 
-- View random historical events that happened on this day in history.
-- Like events and save them to your favorites for later reference.  
-- Download events for personal record or offline access.
-- Share events with friends or on social media.
-- Easily retrieve new events with a click, refreshing your daily historical insights.
+- **Historical Events**: View random historical events that happened on this day in history.
+- **Favorites**: Like events and save them to your favorites for later reference.
+- **Offline Access**: Download events for personal record or offline access.
+- **Social Sharing**: Share events on social media.
+- **Easy Refresh**: Easily retrieve new events with a click, refreshing your daily historical insights.
 
 <br>
 <img width="320" src="https://github.com/Randalab6/cr-extension/assets/31637771/8d6f4635-59c6-464c-8527-9db506a709bb">
@@ -28,7 +27,6 @@ This is a living and expermintal project, constantly evolving with new features 
 <img width="300" alt="Screenshot 2023-12-11 at 5 21 23 PM" src="https://github.com/Randalab6/cr-extension/assets/31637771/9fd998c9-5a76-4d6e-ba8e-d8139aecd0e0">
 
 <img width="310" alt="Screenshot 2023-12-12 at 2 13 40 PM" src="https://github.com/Randalab6/cr-extension/assets/31637771/a1208780-39bc-4864-a03c-fc352af42a6f">
-
 
 
 ## Technologies 
@@ -43,16 +41,17 @@ This is a living and expermintal project, constantly evolving with new features 
 
 ## Setup and Installation
 
-1 - clone repo locally
+**Clone Repository**
 
+**Setup for Backend**
 
-2 - Setup for Backend
   ``` bash
     cd server
     yarn install
    ```
 
-3 - Setup for Frontend
+**Setup for Frontend**
+
   ``` bash
     cd client
     yarn install
@@ -60,20 +59,20 @@ This is a living and expermintal project, constantly evolving with new features 
 
 ### Environment Variables and Prerequisites
 
-- `PORT`: the backend server runs on 8000
-- `MONGODB_USERNAME`: MongoDB username used for the connection string
-- `MONGODB_PASS`: MongoDB password used for the connection string
-- Node.js (v20.1.0)
+- Ensure Node.js (v20.1.0 or later) is installed.
+-`PORT`: the backend server runs on 8000
+-`MONGODB_USERNAME`: MongoDB username for connection string
+- MONGODB_PASS`: MongoDB password for connection string
 
 ### Running the Application
 
-Running Backend
+**Backend**
 ``` bash
 cd server
 yarn server
 ```
 
-Running Frontend
+**Frontend**
 ``` bash
 cd client
 yarn client
@@ -81,7 +80,12 @@ yarn client
 
 ## Usage and Contribution
 
-This extension is not published. To utilize as a chrome extension, upload the client build into unload pack after including enviornment variables. This project can be used a tempelate to customize your own cards or can you contribute styling and refining the query alogrothim. 
+This extension is currently not published. To use it as a Chrome extension, upload the client build into Chrome's 'Unload Pack' after setting up the environment variables. This project can serve as a template to customize your cards or contribute to styling and refining the query algorithm.
+
+<div align="center">
+    <img width="429" alt="Screenshot 2023-12-07 at 9 53 29 PM" src="https://github.com/Randalab6/cr-extension/assets/31637771/09e7dc29-5dbd-4e0b-9a23-b883cd264843">
+</div>
+
 
 ## License 
-MIT
+This project is licensed under the MIT License.
