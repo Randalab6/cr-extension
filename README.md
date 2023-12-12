@@ -41,19 +41,15 @@ This is a living and expermintal project, constantly evolving with new features 
 
 ## Setup and Installation
 
-Instructions on setting up the project locally.
+1 - clone repo locally
 
-git clone [repo-link]
-cd [repo-name]
+2 - Setup for Backend
+    cd server
+    yarn install
 
-Setup for Backend
-cd server
-yarn install
-
-Setup for Frontend
-cd client
-yarn install
-
+3 - Setup for Frontend
+    cd client
+    yarn install
 
 ### Prerequisites
 
@@ -64,17 +60,16 @@ TODO
 
 ### Environment Variables
 
-- `PORT`: Port where the backend server runs (e.g., 8000)
-- `MONGODB_URI`: Connection string for MongoDB
-- Any other environment variables required
+- `PORT`: the backend server runs on 8000
+-  `MONGODB_USERNAME`: MongoDB username used for the connection string
+- `MONGODB_PASS`: MongoDB password used for the connection string
 
 ### Running the Application
 
 Running Backend
-cd client
-yarn client
-
-Running Frontend
 cd server
 yarn server
 
+Running Frontend
+cd client
+yarn client
