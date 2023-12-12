@@ -1,12 +1,19 @@
-<h1 align="center" style="font-size: 2.5em;">On This Day Chrome Extension</h1>
-
 <div align="center">
     <img src="https://github.com/Randalab6/cr-extension/assets/31637771/f10ff793-deda-4859-a7dd-a6ed1fdd5a38" alt="logo" width="100" height="100">
 </div>
 
-<p align="center">
-"On This Day" is a Chrome extension that retrieves and displays historical events that took place on the current date.
+<h1 align="center" style="font-size: 2.5em;">On This Day Chrome Extension</h1>
+
+
+
+
+
+## Introduction
+<p>
+"On This Day" is a Chrome extension that retrieves and displays historical events that took place on the current date. Each day, it fetches and displays a curated list of historical events that occurred on the current date. 
 </p>
+
+This is a living and expermintal project, constantly evolving with new features and improvements. Contributions, suggestions, and feedback from the community are always welcome and highly encouraged.
 
 ## Features
 
