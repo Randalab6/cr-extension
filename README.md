@@ -4,9 +4,13 @@
     <img src="https://github.com/Randalab6/cr-extension/assets/31637771/f10ff793-deda-4859-a7dd-a6ed1fdd5a38" alt="logo" width="100" height="100">
 </div>
 
-<p align="center">
-"On This Day" is a Chrome extension that retrieves and displays historical events that took place on the current date.
-</p>
+
+
+<div></div>
+<div align="center">
+    "On This Day" is a Chrome extension that retrieves and displays historical events that took place on the current date.
+</div>
+
 
 ## Features
 
@@ -36,8 +40,7 @@
 
 Instructions on setting up the project locally.
 
-git clone [repo-link]
-cd [repo-name]
+clone repo locally
 
 Setup for Backend
 cd server
@@ -57,17 +60,19 @@ TODO
 
 ### Environment Variables
 
-- `PORT`: Port where the backend server runs (e.g., 8000)
-- `MONGODB_URI`: Connection string for MongoDB
-- Any other environment variables required
+- `PORT`: the backend server runs on 8000
+-  `MONGODB_USERNAME`: MongoDB username used for the connection string
+- `MONGODB_PASS`: MongoDB password used for the connection string
 
 ### Running the Application
 
 Running Backend
+cd server
+yarn server
+
+Running Frontend
 cd client
 yarn client
 
-Running Frontend
-cd server
-yarn server
+
 
