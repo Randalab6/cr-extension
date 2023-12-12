@@ -61,7 +61,7 @@ TODO
 ### Environment Variables
 
 - `PORT`: the backend server runs on 8000
--  `MONGODB_USERNAME`: MongoDB username used for the connection string
+- `MONGODB_USERNAME`: MongoDB username used for the connection string
 - `MONGODB_PASS`: MongoDB password used for the connection string
 
 ### Running the Application
