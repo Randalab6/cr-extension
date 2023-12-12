@@ -2,8 +2,8 @@
     <img src="https://github.com/Randalab6/cr-extension/assets/31637771/f10ff793-deda-4859-a7dd-a6ed1fdd5a38" alt="logo" width="100" height="100">
 </div>
 
-<h1 align="center" style="font-size: 2.5em;">On This Day Chrome Extension</h1>
 
+<p align="center"> **On This Day Chrome Extension** </p>
 
 
 
@@ -43,33 +43,37 @@ This is a living and expermintal project, constantly evolving with new features 
 
 1 - clone repo locally
 
+
 2 - Setup for Backend
+  ``` bash
     cd server
     yarn install
+   ```
 
 3 - Setup for Frontend
+  ``` bash
     cd client
     yarn install
+  ```
 
-### Prerequisites
-
-TODO
-- Node.js (vX.X.X)
-- MongoDB (vX.X.X)
-- Any other prerequisites
-
-### Environment Variables
+### Environment Variables and Prerequisites
 
 - `PORT`: the backend server runs on 8000
 - `MONGODB_USERNAME`: MongoDB username used for the connection string
 - `MONGODB_PASS`: MongoDB password used for the connection string
+- Node.js (v20.1.0)
 
 ### Running the Application
 
 Running Backend
+``` bash
 cd server
 yarn server
+```
 
 Running Frontend
+``` bash
 cd client
 yarn client
+```
+
