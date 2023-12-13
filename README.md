@@ -83,6 +83,7 @@ yarn client
 
 This extension is currently not published. To use it as a Chrome extension, upload the client build into Chrome's 'Unload Pack' after setting up the environment variables. This project can serve as a template to customize your cards or contribute to styling and refining the query algorithm.
 
+<br>
 <div align="center">
     <img width="429" alt="Screenshot 2023-12-07 at 9 53 29 PM" src="https://github.com/Randalab6/cr-extension/assets/31637771/09e7dc29-5dbd-4e0b-9a23-b883cd264843">
 </div>
