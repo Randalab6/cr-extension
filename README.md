@@ -22,11 +22,12 @@ This is a living and expermintal project, constantly evolving with new features 
 - **Easy Refresh**: Easily retrieve new events with a click, refreshing your daily historical insights.
 
 <br>
-<img width="320" src="https://github.com/Randalab6/cr-extension/assets/31637771/8d6f4635-59c6-464c-8527-9db506a709bb">
+<div align="center">
+<img width="400" src="https://github.com/Randalab6/cr-extension/assets/31637771/8d6f4635-59c6-464c-8527-9db506a709bb">
+    <img width="390" src="https://github.com/Randalab6/cr-extension/assets/31637771/9fd998c9-5a76-4d6e-ba8e-d8139aecd0e0">
+</div>
 
-<img width="300" alt="Screenshot 2023-12-11 at 5 21 23 PM" src="https://github.com/Randalab6/cr-extension/assets/31637771/9fd998c9-5a76-4d6e-ba8e-d8139aecd0e0">
 
-<img width="310" alt="Screenshot 2023-12-12 at 2 13 40 PM" src="https://github.com/Randalab6/cr-extension/assets/31637771/a1208780-39bc-4864-a03c-fc352af42a6f">
 
 
 ## Technologies 
